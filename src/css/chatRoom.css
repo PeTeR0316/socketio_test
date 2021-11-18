@@ -1,0 +1,68 @@
+div.chatRoom {
+    padding: 10px;
+}
+
+div.chatListArea {
+    height: 400px;
+}
+
+ul.chatList{
+    list-style: none;
+}
+
+li.message-item-received-message {
+    background-color: #1e4880;
+    width: 70%;
+    border-radius: 5px;
+    padding: 3px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    float: left;
+    color: #fff;
+    position: relative;
+}
+
+li.message-item-my-message {
+    background-color: #65a647;
+    width: 70%;
+    border-radius: 5px;
+    padding: 3px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    float: right;
+    color: #fff;
+    position: relative;
+}
+
+li.message-item-received-message > span.sendTime {
+    float: right;
+    color: #000;
+    position: absolute;
+    right: -80px;
+}
+
+li.message-item-my-message > span.sendTime {
+    float: left;
+    color: #000;
+    position: absolute;
+    left: -80px;
+}
+
+textarea.new-message-input-field {
+    resize: none;
+    width: 300px;
+    height: 40px;
+    border: 1px solid #000;
+    vertical-align: top;
+}
+
+button.send-message-button {
+    border: none;
+    width: 45px;
+    height: 40px;
+    margin-left: 5px;
+    background-color: #000;
+    color:#fff;
+    font-weight: bold;
+    text-align: center;
+}

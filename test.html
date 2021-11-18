@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="width: 100%; padding: 50px;">
+        <!-- <div id="my_div" style="border: 1px solid #000; width: 200px; height: 500px;" onclick="clickEvent()">
+        </div>
+        <div id="result"></div> -->
+
+        <div className="timeDeal">
+            <h3 className="title" id="timeOut">타임딜</h3>
+            <div className="countDown">
+                <div>
+                    <span id="days" className="countText">0</span>
+                    <br />
+                    <span>days</span>
+                </div>
+                <div>
+                    <span id="hours" className="countText">0</span>
+                    <br />
+                    <span>hours</span>
+                </div>
+                <div>
+                    <span id="minutes" className="countText">0</span>
+                    <br />
+                    <span>minutes</span>
+                </div>
+                <div>
+                    <span id="seconds" className="countText">0</span>
+                    <br />
+                    <span>seconds</span>
+                </div>
+            </div>
+        </div>
+
+        <select name="" id="time" >
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+        </select>
+
+        <button onclick="dayCountDown()">
+            일일 단위
+        </button>
+
+        <button onclick="houreCountDown()">
+            시간 단위
+        </button>
+    </div>
+
+
+
+    <script>
+        //const nowDate = '11 mar 2021';
+
+        let today = new Date();
+        let year = today.getFullYear();
+        let month= today.getMonth()
+        let date = today.getDate();
+        let hours = today.getHours();
+        let minutes = today.getMinutes();
+        let seconds = today.getSeconds();
+
+        // year, month, day, hours, minutes, seconds
+        // let nowDate = new Date(year, month, date, hours, minutes, seconds);
+
+
+        function dayCountDown() {
+            let countTime = parseInt(document.getElementById('time').value); //설정한 타이머 시간
+            let nowDate = new Date(year, month, date + countTime, hours, minutes, seconds);
+            console.log(countTime);
+
+            //10보다 작은 숫자의 앞에 '0'을 추가
+            const formatTime = (time) => {
+                return time < 10 ? time : time;
+            }
+
+            const countDown = () => {
+                const timeOutDate = new Date(nowDate); //종료 시간
+                const currentDate = new Date(); //현재 시간
+
+                console.log(timeOutDate)
+
+                const totalSeconds = (timeOutDate - currentDate) / 1000;
+                const days = Math.floor(totalSeconds / 3600 / 24);
+                const hours = (Math.floor(totalSeconds / 3600) % 24);
+                const minutes = (Math.floor(totalSeconds /60) % 60);
+                const seconds = Math.floor(totalSeconds) % 60;
+
+                document.getElementById('days').innerText = formatTime(days);
+                document.getElementById('hours').innerText = formatTime(hours);
+                document.getElementById('minutes').innerText = formatTime(minutes);
+                document.getElementById('seconds').innerText = formatTime(seconds);
+            }
+
+            let startCountDown = setInterval(countDown, 1000)
+        }
+
+
+        function houreCountDown() {
+            let countTime = parseInt(document.getElementById('time').value); //설정한 타이머 시간
+            let nowDate = new Date(year, month, date, hours + countTime, minutes, seconds);
+            console.log(countTime);
+
+            //10보다 작은 숫자의 앞에 '0'을 추가
+            const formatTime = (time) => {
+                return time < 10 ? time : time;
+            }
+
+            const countDown = () => {
+                const timeOutDate = new Date(nowDate); //종료 시간
+                const currentDate = new Date(); //현재 시간
+
+                console.log(timeOutDate)
+
+                const totalSeconds = (timeOutDate - currentDate) / 1000;
+                const days = Math.floor(totalSeconds / 3600 / 24);
+                const hours = (Math.floor(totalSeconds / 3600) % 24);
+                const minutes = (Math.floor(totalSeconds /60) % 60);
+                const seconds = Math.floor(totalSeconds) % 60;
+
+                document.getElementById('days').innerText = formatTime(days);
+                document.getElementById('hours').innerText = formatTime(hours);
+                document.getElementById('minutes').innerText = formatTime(minutes);
+                document.getElementById('seconds').innerText = formatTime(seconds);
+            }
+
+            let startCountDown = setInterval(countDown, 1000)
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+    //리액트 타임딜 코드
+    // const [timeValue, setTimeValue] = useState(1);
+    // const [dateObj, setDateObj] = useState(new Date())
+    
+    // //let dateObj = new Date(); 
+    // // console.log(dateObj.getHours());
+    // //dateObj.setDate(dateObj.getDate() + timeValue); //일(day) 단위 시간 추가
+
+    // const dayCountDownTimer = function (date) { 
+    //     let _vDate = new Date(date); // 전달 받은 일자 
+    //     const _second = 1000; 
+    //     const _minute = _second * 60; 
+    //     const _hour = _minute * 60; 
+    //     const _day = _hour * 24; 
+    //     let timer; 
+
+    //     function showRemaining() { 
+    //         let now = new Date(); 
+    //         let distDt = _vDate - now; 
+
+    //         if (distDt < 0) { 
+    //             clearInterval(timer); 
+    //             document.getElementById('timeOut').innerText = '해당 이벤트가 종료 되었습니다!';
+    //             return; 
+    //         } 
+    //         let days = Math.floor(distDt / _day); 
+    //         let hours = Math.floor((distDt % _day) / _hour); 
+    //         let minutes = Math.floor((distDt % _hour) / _minute); 
+    //         let seconds = Math.floor((distDt % _minute) / _second); 
+            
+    //         //document.getElementById(id).textContent = date.toLocaleString() + "까지 : "; 
+    //         document.getElementById('days').innerText = days; 
+    //         document.getElementById('hours').innerText = hours; 
+    //         document.getElementById('minutes').innerText = minutes; 
+    //         document.getElementById('seconds').innerText = seconds; 
+    //     } 
+        
+    //     timer = setInterval(showRemaining, 1000); 
+    // }
+
+    // const hourCountDownTimer = function (date) { 
+    //     let _vDate = new Date(date); // 전달 받은 일자 
+    //     const _second = 1000; 
+    //     const _minute = _second * 60; 
+    //     const _hour = _minute * 60; 
+    //     const _day = _hour * 24; 
+    //     let timer; 
+
+    //     function showRemaining() { 
+    //         let now = new Date(); 
+    //         let distDt = _vDate - now; 
+
+    //         if (distDt < 0) { 
+    //             clearInterval(timer); 
+    //             document.getElementById('timeOut').innerText = '해당 이벤트가 종료 되었습니다!';
+    //             return; 
+    //         } 
+    //         let days = Math.floor(distDt / _day); 
+    //         let hours = Math.floor((distDt % _day) / _hour); 
+    //         let minutes = Math.floor((distDt % _hour) / _minute); 
+    //         let seconds = Math.floor((distDt % _minute) / _second); 
+            
+    //         //document.getElementById(id).textContent = date.toLocaleString() + "까지 : "; 
+    //         document.getElementById('days').innerText = days; 
+    //         document.getElementById('hours').innerText = hours; 
+    //         document.getElementById('minutes').innerText = minutes; 
+    //         document.getElementById('seconds').innerText = seconds; 
+    //     } 
+        
+    //     timer = setInterval(showRemaining, 1000); 
+    // }
+
+    // //일일 단위 타임딜 설정
+    // const dayCountDown = () => {
+    //     let timeValue = parseInt(document.getElementById('setTime').value);
+    //     setTimeValue(timeValue);
+
+    //     dateObj.setDate(dateObj.getDate() + timeValue);
+    //     //console.log(dateObj.setDate(dateObj.getDate() + timeValue));
+    //     dayCountDownTimer(dateObj);
+    // }
+
+    // //시간 단위 타임딜 설정
+    // const hourCountDown = () => {
+    //     let timeValue = parseInt(document.getElementById('setTime').value);
+    //     setTimeValue(parseInt(timeValue));
+
+    //     dateObj.setDate(dateObj.getHours() + timeValue);
+    //     console.log(dateObj.setDate(dateObj.getHours() + timeValue));
+    //     // console.log(dateObj.getHours());
+
+    //     hourCountDownTimer(dateObj);
+    // }
+    </script>
+</body>
+</html>
